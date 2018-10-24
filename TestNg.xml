@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="10" name="TestSuite1">
+  <test thread-count="5" verbose="10" name="Test1">
+    <classes>
+      <class name="MyTests">
+        <methods>
+          <include name="addition"/>
+          <include name="subtraction"/>
+        </methods>
+      </class> <!-- MyTests -->
+    </classes>
+  </test> <!-- Test1 -->
+</suite> <!-- TestSuite1 -->
