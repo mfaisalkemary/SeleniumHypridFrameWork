@@ -22,6 +22,9 @@ public class Calculator {
 
     }
 
+    @FindBy(xpath = "/html/body/div[2]/div/div[2]/form/div/button")
+    WebElement acceptCookies;
+
 
     @FindBy(id= "/html/body/div[1]/form/div/div[2]/div/div[2]/input[19]")
     WebElement number0;
@@ -116,6 +119,9 @@ public class Calculator {
 
     public boolean addition(String num1,String num2 , String num3) throws Exception{
         try {
+
+            acceptCookies.click();
+            Thread.sleep(2000);
             result.sendKeys(num1);
             sumation.click();
             result.sendKeys(num2);

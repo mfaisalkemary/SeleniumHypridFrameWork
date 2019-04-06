@@ -5,7 +5,7 @@
     <classes>
       <class name="MyTests">
         <methods>
-          <include name="addition" invocation-numbers="2 4"/>
+          <include name="addition"/>
           <include name="Setup"/>
           <include name="End"/>
         </methods>

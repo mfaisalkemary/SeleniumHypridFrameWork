@@ -1,10 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.Calculator;
 
 public class MyTests {
@@ -29,10 +26,11 @@ public class MyTests {
     }*/
 
 
-    @BeforeClass
+    @BeforeMethod
     private void Setup() throws Exception {
         try {
-            System.setProperty("webdriver.chrome.driver", "Grid_Drivers\\Chrome\\chromedriver.exe");
+           // System.setProperty("webdriver.chrome.driver", "Grid_Drivers\\Chrome\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "/Users/mfaisalkemary/IdeaProjects/SeleniumHypridFrameWork/Resources/chromedriver");
             driver1 = new ChromeDriver();
             calc = new Calculator(driver1);
             driver1.manage().window().maximize();
@@ -82,7 +80,7 @@ public class MyTests {
     }
 
 
-    @AfterTest
+    @AfterMethod
     private void End(){
         driver1.quit();
     }

@@ -6,7 +6,6 @@
       <class name="MyTests">
         <methods>
           <include name="addition"/>
-          <include name="subtraction"/>
         </methods>
       </class> <!-- MyTests -->
     </classes>

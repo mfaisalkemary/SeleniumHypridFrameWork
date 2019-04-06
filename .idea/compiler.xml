@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="FrameWork" />
         <module name="SeleniumFramework" />
+        <module name="SeleniumHypridFrameWork" />
       </profile>
     </annotationProcessing>
   </component>

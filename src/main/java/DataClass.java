@@ -13,14 +13,17 @@ public class DataClass {
 
 
     List<String> DataSheets = new ArrayList<String>();
-    MyTests tests =new MyTests();
+    MyTests tests = new MyTests();
     Test test1;
 
     public String getTestDataSheetName(String testName) throws Exception {
         try {
             Fillo fillo = new Fillo();
-            Connection connection = fillo.getConnection("C:\\cracking_code_interview\\SeleniumFramework\\newsheet.xlsx");
-            String strQuery = "Select TestDataSheetName from tests where testname = '" + testName + "' and executionflag ='y'";
+            //Connection connection = fillo.getConnection("C:\\cracking_code_interview\\SeleniumFramework\\newsheet.xlsx");
+            Connection connection = fillo.getConnection("/Users/mfaisalkemary/IdeaProjects/SeleniumHypridFrameWork/Resources/ControlSheet.xlsx");
+
+            String strQuery = "Select TestDataSheetName from tests where testname = '"+ testName +"' and executionflag ='y'";
+            //String strQuery = "Select Data from tests where testname = \"addition\" and executionflag =\"y\"";
             Recordset testCaseNames = connection.executeQuery(strQuery);
 
             /*while(testCaseNames.next()){
@@ -47,11 +50,11 @@ public class DataClass {
 
     }
 
-    public Object[][] getTestData(String sheetTestName) throws Exception{
+    public Object[][] getTestData(String sheetTestName) throws Exception {
         try {
             Fillo fillo = new Fillo();
             String dataSheetName = getTestDataSheetName(sheetTestName);
-            Connection connection = fillo.getConnection("C:\\cracking_code_interview\\SeleniumFramework\\newsheet.xlsx");
+            Connection connection = fillo.getConnection("/Users/mfaisalkemary/IdeaProjects/SeleniumHypridFrameWork/Resources/ControlSheet.xlsx");
             String strQuery = "Select * from " + dataSheetName;
             Recordset testData = connection.executeQuery(strQuery);
 
@@ -122,77 +125,71 @@ public class DataClass {
             //return null;
             return data;
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Can't retrieve data sheet");
 
         }
 
 
-
-
-
     }
 
 
-    public Iterator<Object[]> getTestData2(String sheetTestName) throws Exception {
-        try {
-            Fillo fillo = new Fillo();
-            String dataSheetName = getTestDataSheetName(sheetTestName);
-            Connection connection = fillo.getConnection("C:\\cracking_code_interview\\SeleniumFramework\\newsheet.xlsx");
-            String strQuery = "Select * from " + dataSheetName;
-            Recordset testData = connection.executeQuery(strQuery);
+//    public Iterator<Object[]> getTestData2(String sheetTestName) throws Exception {
+//                    try {
+//                        Fillo fillo = new Fillo();
+//                        String dataSheetName = getTestDataSheetName(sheetTestName);
+//                        Connection connection = fillo.getConnection("C:\\cracking_code_interview\\SeleniumFramework\\newsheet.xlsx");
+//                        String strQuery = "Select * from " + dataSheetName;
+//                        Recordset testData = connection.executeQuery(strQuery);
+//
+//                        if (testData.getCount() == 0) {
+//                            throw new Exception("Data Sheet is empty");
+//                        }
+//
+//                        int rows = testData.getCount();
+//                        int cols = testData.getFieldNames().size();
+//                        ArrayList<Object[]> testData2 = null;
+//                        Object[] objects = null;
+//
+//
+//                        String[][] data = new String[rows][cols];
+//                        for (int i = 0; i < rows; i++) {
+//                            testData.next();
+//                            for (int j = 0; j < cols; j++) {
+//                                testData.next();
+//                                //data[i][j] = testData.getField(j).value();
+//                                objects[j] = testData.getField(j).value();
+//                                //testData2.add(i,testData.getField(j).value());
+//                            }
+//                            testData2.add(objects);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
-            if (testData.getCount() == 0) {
-                throw new Exception("Data Sheet is empty");
-            }
 
-            int rows = testData.getCount();
-            int cols = testData.getFieldNames().size();
-            ArrayList<Object[]> testData2 = null;
-            Object[]objects=null;
-
-
-            String[][] data = new String[rows][cols];
-            for (int i = 0; i < rows; i++) {
-                testData.next();
-                for (int j = 0; j < cols; j++) {
-                       testData.next();
-                    //data[i][j] = testData.getField(j).value();
-                    objects[j]=testData.getField(j).value();
-                    //testData2.add(i,testData.getField(j).value());
-                }
-                testData2.add(objects);
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-
-            public ArrayList<String> getTestsNames(){
+    public ArrayList<String> getClassTestsNames() {
         try {
             Class methods = tests.getClass();
-            Method[] methodArray= methods.getDeclaredMethods();
+            Method[] methodArray = methods.getDeclaredMethods();
             //methods.getAnnotations()
-            ArrayList<String> testsNames=new ArrayList<String>();
+            ArrayList<String> testsNames = new ArrayList<String>();
 
-            for (int i =0;i<methodArray.length;i++){
+            for (int i = 0; i < methodArray.length; i++) {
                 //   System.out.println(methodArray[i].getName());
-                if(methodArray[i].getAnnotation(Test.class)!=null){
+                if (methodArray[i].getAnnotation(Test.class) != null) {
                     testsNames.add(methodArray[i].getName());
-                    //System.out.println(methodArray[i].getName());
+                    System.out.println(methodArray[i].getName());
                 }
 
 
                 //System.out.println(methodArray[i].getAnnotation(Test.class));
             }
             return testsNames;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -200,61 +197,57 @@ public class DataClass {
 
     }
 
-    public ArrayList<String> getSheetTestsNames(){
+    public ArrayList<String> getSheetTestsNames() {
         try {
             Fillo fillo = new Fillo();
-            Connection connection = fillo.getConnection("C:\\cracking_code_interview\\SeleniumFramework\\newsheet.xlsx");
-            String strQuery = "Select testname from tests where executionflag = 'y'" ;
+            //Connection connection = fillo.getConnection("C:\\cracking_code_interview\\SeleniumFramework\\newsheet.xlsx");
+            Connection connection = fillo.getConnection("/Users/mfaisalkemary/IdeaProjects/SeleniumHypridFrameWork/Resources/ControlSheet.xlsx");
+            String strQuery = "Select testname from tests where executionflag = 'y'";
             Recordset testsNames = connection.executeQuery(strQuery);
             ArrayList<String> SheetTestsNames = new ArrayList<String>();
-            while (testsNames.next()){
+            while (testsNames.next()) {
                 SheetTestsNames.add(testsNames.getField(0).value());
+                System.out.println(testsNames.getField(0).value());
             }
             testsNames.close();
             connection.close();
             return SheetTestsNames;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
 
     }
 
-    public ArrayList<String>finalTestsList(){
+    public ArrayList<String> finalTestsList() {
         try {
-            ArrayList<String> sheetTestsNames=getSheetTestsNames();
-            ArrayList<String> classTestNames=getTestsNames();
-            ArrayList<String> finalTestList=new ArrayList<String>();
+            ArrayList<String> sheetTestsNames = getSheetTestsNames();
+            ArrayList<String> classTestNames = getClassTestsNames();
+            ArrayList<String> finalTestList = new ArrayList<String>();
 
-            for (int i=0;i<sheetTestsNames.size();i++){
-                for (int j=0;j<classTestNames.size();j++){
-                    if (sheetTestsNames.get(i).trim().toUpperCase().equals(classTestNames.get(j).toUpperCase())){
+            for (int i = 0; i < sheetTestsNames.size(); i++) {
+                for (int j = 0; j < classTestNames.size(); j++) {
+                    if (sheetTestsNames.get(i).trim().toUpperCase().equals(classTestNames.get(j).toUpperCase())) {
                         finalTestList.add(sheetTestsNames.get(i).trim().toLowerCase());
                     }
                 }
             }
 
-            for (String test:finalTestList){
+            for (String test : finalTestList) {
                 System.out.println(test.toLowerCase());
             }
             return finalTestList;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
-
-
-
 
 
     }
 
 
     @DataProvider(name = "numbers1")
-    private Object [][] dataProvider(Method m) {
+    private Object[][] dataProvider(Method m) {
         try {
             //data=new DataClass();
             return getTestData(m.getName());
@@ -266,24 +259,20 @@ public class DataClass {
     }
 
 
-    @DataProvider(name = "numbers2")
-    private Iterator<Object[]> dataProvider2(Method m) {
-        try {
-            //data=new DataClass();
-        //    return getTestData();
-        }
-
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-
-        }
-
-
-
-
-
-    }
+//    @DataProvider(name = "numbers2")
+//    private Iterator<Object[]> dataProvider2(Method m) {
+//        try {
+//            //data=new DataClass();
+//             // return getTestData();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//
+//        }
+//
+//
+//
+//    }
 
 
 
@@ -318,8 +307,10 @@ public class DataClass {
 
         // d.testDataProviderInvoker();
         //d.getTestData("Subtraction");
-      //  d.finalTestsList();
-        System.out.println( d.getTestDataSheetName("subtraction"));
+        //d.finalTestsList();
+       // d.getClassTestsNames();
+        d.getSheetTestsNames();
+        //System.out.println( d.getTestDataSheetName("subtraction"));
 
 
 
