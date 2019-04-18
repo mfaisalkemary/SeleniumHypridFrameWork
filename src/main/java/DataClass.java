@@ -50,12 +50,24 @@ public class DataClass {
 
     }
 
+
+
     public Object[][] getTestData(String sheetTestName) throws Exception {
         try {
+            String strQuery;
             Fillo fillo = new Fillo();
             String dataSheetName = getTestDataSheetName(sheetTestName);
             Connection connection = fillo.getConnection("/Users/mfaisalkemary/IdeaProjects/SeleniumHypridFrameWork/Resources/ControlSheet.xlsx");
-            String strQuery = "Select * from " + dataSheetName;
+
+//            String dataRange = "Select DataRange from tests where TestDataSheetName ='"+sheetTestName+"'";
+//
+//            if(dataRange.contains(",")){
+//                 strQuery = "Select * from " + dataSheetName +"where DataRow in " ;
+//
+//            }
+
+            strQuery = "Select * from " + dataSheetName+" where DataRow ";
+
             Recordset testData = connection.executeQuery(strQuery);
 
             if (testData.getCount() == 0) {
@@ -65,33 +77,32 @@ public class DataClass {
             int rows = testData.getCount();
             int cols = testData.getFieldNames().size();
 
-            String[][] data = new String[rows][cols];
+            String[][] data = new String[rows][cols-1];
             for (int i = 0; i < rows; i++) {
                 testData.next();
-                for (int j = 0; j < cols; j++) {
+                for (int j = 0; j <cols-1; j++) {
                     //   testData.next();
-                    data[i][j] = testData.getField(j).value();
+                    data[i][j] = testData.getField(j+1).value();
+
                 }
             }
 
 
-
-
-
-
-
-           /* testData.next();
-
-            System.out.println(testData.getField(0).value());
+            System.out.println(Arrays.deepToString(data));
 
             //testData.next();
-            System.out.println(testData.getField(1).value());
+
+//            System.out.println(testData.getField(0).value());
+//
+//            //testData.next();
+//            System.out.println(testData.getField(1).value());
+//
+//
+//            //testData.next();
+//            System.out.println(testData.getField(2).value());
+//            System.out.println(testData.getField(3).value());
 
 
-            //testData.next();
-            System.out.println(testData.getField(2).value());
-
-*/
 
 
 
@@ -133,6 +144,8 @@ public class DataClass {
 
 
     }
+
+
 
 
 //    public Iterator<Object[]> getTestData2(String sheetTestName) throws Exception {
@@ -306,10 +319,10 @@ public class DataClass {
        }*/
 
         // d.testDataProviderInvoker();
-        //d.getTestData("Subtraction");
+        d.getTestData("addition");
         //d.finalTestsList();
        // d.getClassTestsNames();
-        d.getSheetTestsNames();
+       // d.getSheetTestsNames();
         //System.out.println( d.getTestDataSheetName("subtraction"));
 
 

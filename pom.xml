@@ -76,6 +76,33 @@
             <artifactId>selenium-java</artifactId>
             <version>3.14.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.198</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.5</version>
+        </dependency>
+
+
+
+
+
+
     </dependencies>
 
     <build>
@@ -100,7 +127,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>MainRun</mainClass>
+                            <mainClass>TestGenerator</mainClass>
                             <arguments>
                                 <argument>arg0</argument>
                                 <argument>arg1</argument>

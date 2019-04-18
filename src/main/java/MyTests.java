@@ -35,6 +35,7 @@ public class MyTests {
             calc = new Calculator(driver1);
             driver1.manage().window().maximize();
             driver1.get("https://web2.0calc.com/");
+            calc.acceptCookies.click();
 
         } catch (Exception e) {
             e.printStackTrace();
